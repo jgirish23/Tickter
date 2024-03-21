@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Tickets - All tickets{% endblock %}
+
+{% block header_icon %}<i class="fa fa-file-text-o fa-5x"></i>{% endblock %}
+{% block headline %}All open Tickets{% endblock %}
+{% block head-message %}Overview of all open tickets in the system{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
+<script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+
+
+    <div class="page-header"><h1>All open Tickets</h1></div>
+
+    <table id="assigned" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Status</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Time</th>
+            <th>File</th>
+        </tr>
+        </thead>
+
+        <tbody>
+    {% for ticket in tickets %}
+        <tr>
+            <td>{{ ticket.id }}</a></td>
+            <td>{% if ticket.Status == False %}
+                   <span class="label label-danger">Pending</span>
+                {% elif ticket.status == "IN PROGRESS" %}
+                   <span class="label label-default">IN PROGRESS</span>
+                {% elif ticket.status == "WAITING" %}
+                   <span class="label label-warning">WAITING</span>
+                {% elif ticket.Status == True %}
+                   <span class="label label-success">Resolved</span>
+                {% else %}
+                {{ ticket.status }}
+                {% endif %}
+            </td>
+            <td>{{ ticket.Title }}</td>
+            <td>{{ ticket.Description }}</td>
+            <td>{{ ticket.Time }}</td>
+            <td>{{ ticket.file }}</td>
+        </tr>
+    {% endfor %}
+    </tbody></table>
+
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Tickets - Inbox{% endblock %}
+{% block header_icon %}<i class="fa fa-file-text-i fa-5x"></i>{% endblock %}
+{% block headline %}Tickets{% endblock %}
+{% block head-message %}Raise your ticket{% endblock %}
+{% block content %}
+
+{% load static %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css"
+/>
+<link
+  rel="stylesheet"
+  href="{% static 'css/create_ticket.css' %}"
+/>
+
+<!-- <style>
+    .tt{
+        background-color: red;
+    }
+
+</style> -->
+<script
+  type="text/javascript"
+  language="javascript"
+  src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"
+></script>
+<script
+  type="text/javascript"
+  language="javascript"
+  src="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"
+></script>
+
+
+<div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

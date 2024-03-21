@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+      rel="stylesheet"
+    />
+    <title>profile</title>
+  </head>
+  <body>
+    <section class="vh-100" style="background-color: #eee">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-md-12 col-xl-4">
+            <div class="card" style="border-radius: 15px">
+              <div class="card-body text-center">
+                <form method="POST">
+                  <div class="mt-3 mb-4">
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+                      class="rounded-circle img-fluid"
+                      style="width: 100px"
+                    />
+                  </div>
+                  <h4 class="mb-2">{{user.get_username}}</h4>
+                  <p class="text-muted mb-4">{{user.email}}</p>
+                  <p class="text-muted mb-4">Last Logged at : {{ user.last_login }}</p>
+                  <div class=" justify-content-between text-center mt-5 mb-2"  >
+                    <div class="px-3 mb-3">
+                      <input type="text" id="password1" type="password" class="text-muted mb-0" placeholder="Password"></input>
+                    </div>
+                    <div>
+                      <input type="text" id="password2" type="password" class="text-muted mb-0" placeholder="Confirm Password"></input>
+                    </div>
+                  </div>
+                  <button
+                    id="profile-btn"
+                    type="submit"
+                    class="btn btn-primary btn-rounded btn-lg"
+                  >
+                    change
+                  </button>
+              </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      const button_post = document.getElementById("profile-btn");
+      button_post.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const password1 = document.getElementById("password1");
+        const password2 = document.getElementById("password2");
+        var psd1=password1.value;
+        var psd2=password2.value;
+        console.log(psd1);
+        console.log("button clicked");
+        try {
+          const response = await fetch("/profile", {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+            body: JSON.stringify({
+              password1: psd1,
+              password2: psd2,
+            }),
+          });
+          // console.log("Completed!!!", response);
+          window.location.href = '../chatbot'
+          // location.reload();
+        } catch (err) {
+          console.error(`Error: ${err}`);
+        }
+      });
+    </script>
+  </body>
+</html>

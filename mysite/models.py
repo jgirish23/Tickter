@@ -8,7 +8,7 @@ class Ticket(models.Model):
     Title = models.CharField(max_length=255,blank=False)
     Description = models.TextField(max_length=255)
     Email = models.EmailField(max_length=254, blank=False)
-    file= models.FileField()
+    file= models.FileField(blank=True, null=True)
     Time = models.DateTimeField(auto_now=True)
     Status = models.BooleanField(default=False, blank=False)
 

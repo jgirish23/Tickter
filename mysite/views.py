@@ -117,7 +117,8 @@ def create_ticket(request):
             form = TicketForm(request.POST, request.FILES)
             if form.is_valid():
 
-                handle_uploaded_file(request.FILES["file"])
+                if(request.FILES):
+                    handle_uploaded_file(request.FILES["file"])
                 form.save()
                 return redirect(home_page)  # Redirect to a success page or any other page you want
         else:
